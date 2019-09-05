@@ -1,0 +1,27 @@
+{
+  "name": "lucasgomes_tech_challenge",
+  "version": "1.0.0",
+  "description": "Desafio Gypz DMCARD",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lucasdlg5/LucasGomes_Tech_Challenge.git"
+  },
+  "keywords": [
+    "node"
+  ],
+  "author": "Lucas Domingos Leão Gomes",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lucasdlg5/LucasGomes_Tech_Challenge/issues"
+  },
+  "homepage": "https://github.com/lucasdlg5/LucasGomes_Tech_Challenge#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.6.12"
+  }
+}
