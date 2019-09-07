@@ -8,7 +8,7 @@ app = express(),
 porta = process.env.PORT || 4000;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://dmcard:dmcard@cluster0-dsb7d.mongodb.net/dmcard?retryWrites=true&w=majority');
+mongoose.connect('mongodb+srv://dmcard:dmcard@cluster0-dsb7d.mongodb.net/dmcard?retryWrites=true&w=majority');
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
