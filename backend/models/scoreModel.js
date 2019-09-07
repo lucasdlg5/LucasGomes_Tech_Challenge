@@ -11,8 +11,8 @@ var dbSchema = new Schema({
    creditScore: {
       type: Number
    },
-   statusMessage: {
-      type: String
+   statusScore: {
+      type: Boolean
    },
    approvedCreditValue: {
       type: Number

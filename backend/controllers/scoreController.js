@@ -52,25 +52,25 @@ exports.nova_solicitacao_cartao = function(req,res){
    console.log(`\nPontuação: ${creditScore}\n`);
    if (creditScore < 299){
       console.log('Abaixo de 299 - REPROVADO');
-      reqBody.statusMessage = "Reprovado";
+      reqBody.statusScore = false;
       reqBody.approvedCreditValue = 0;
    }else if (creditScore >= 300 && creditScore <= 599){
       console.log('Entre 300 a 599 - APROVADO - 1000,00');
-      reqBody.statusMessage = "Aprovado";
+      reqBody.statusScore = "Aprovado";
       reqBody.approvedCreditValue = 1000.00;
    }else if (creditScore >= 600 && creditScore <= 799){
       console.log('Entre 600 a 799 - APROVADO - 50% da Renda');
-      reqBody.statusMessage = "Aprovado";
+      reqBody.statusScore = true;
       reqBody.approvedCreditValue = ((calcBaseRenda*0.5)+calcBaseRenda);
       console.log(reqBody.approvedCreditValue);
    }else if (creditScore >= 800 && creditScore <= 950){
       console.log('Entre 800 a 950 - APROVADO - 200% da renda');
-      reqBody.statusMessage = "Aprovado";
+      reqBody.statusScore = true;
       reqBody.approvedCreditValue = ((calcBaseRenda*2.0)+calcBaseRenda);
       console.log(reqBody.approvedCreditValue);
    }else if (creditScore >= 951 && creditScore <= 999){
       console.log('Entre 951 a 999 - APROVADO - SEM LIMITES');
-      reqBody.statusMessage = "Aprovado";
+      reqBody.statusScore = true;
       reqBody.approvedCreditValue = 1000000.00;
    }
    console.log('\n');
