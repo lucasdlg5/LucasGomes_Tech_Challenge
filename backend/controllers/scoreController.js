@@ -32,6 +32,7 @@ exports.listar_todas_solicitacoes = function(req, res){
    });
 }
 
+
 //POST
 exports.nova_solicitacao_cartao = function(req,res){
    console.log('Foi solicitado um novo cartao!');
@@ -98,5 +99,34 @@ exports.remover_solicitacao = function (req, res){
       }else{
          res.status(200).json({ message: 'Solicitação removida com sucesso!'});
       }
-   })
+   });
+}
+
+//PUT
+exports.atualizar_solicitacao = function (req,res){
+   console.log(`\nAtualizando solicitação... - ${req.params.scoreId}`)
+   Cartao.findOneAndUpdate({_id: req.params.scoreId},
+      req.body,
+      {new: true},
+      function (err, msg){
+         if (err){
+            console.log(err);
+            res.send(msg);
+         }else{
+            res.status(200).json({message: 'Solicitacao atualizada com sucesso!', msg});
+         }
+      });
+}
+
+//GET by ID
+exports.listar_uma_solicitacao = function(req, res){
+   console.log('Listar uma solicitação');
+   Cartao.findById(req.params.scoreId, function(err, msg){
+      if(err){
+         console.log(err)
+         res.send(msg);
+      }else{
+         res.json(msg);
+      }
+   });
 }
