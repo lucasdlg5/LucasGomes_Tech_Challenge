@@ -89,7 +89,7 @@ exports.nova_solicitacao_cartao = function(req,res){
 //DELETE
 exports.remover_solicitacao = function (req, res){
    console.log(`\nRemovendo uma solicitacao... - ${req.params.scoreId}\n`);
-   Cartao.remove({
+   Cartao.deleteOne({
       _id: req.params.scoreId
    }, function (err, msg){
       if(err){

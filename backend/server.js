@@ -8,7 +8,8 @@ app = express(),
 porta = process.env.PORT || 4000;
 
 mongoose.Promise = global.Promise;
-mongoose.connect(process.env.MONGODB_CLUSTER_URI || process.env.MONGODB_URI);
+// mongoose.connect(process.env.MONGODB_CLUSTER_URI || process.env.MONGODB_URI, { useNewUrlParser: true });
+mongoose.connect('mongodb+srv://dmcard:dmcard@cluster0-dsb7d.mongodb.net/dmcard?retryWrites=true&w=majority', { useNewUrlParser: true });
 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
