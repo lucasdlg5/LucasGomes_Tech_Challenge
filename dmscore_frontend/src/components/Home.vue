@@ -1,8 +1,36 @@
 <template>
+    
     <div>
-        <div>
-            <span>Pagina: Home</span>
+        
+        <md-toolbar class="md-primary">
+        <div class="md-toolbar-row">
+            <div class="md-toolbar-section-start">
+            <md-button class="md-icon-button">
+                <md-icon>menu</md-icon>
+            </md-button>
+            </div>
+
+            <md-autocomplete
+            class="search"
+            v-model="selectedScore"
+            :md-options="scoresSearch"
+            md-layout="box">
+            <label>Buscar...</label>
+            </md-autocomplete>
+
+            <div class="md-toolbar-section-end">
+            <md-button class="md-icon-button" v-on:click="getScore()">
+                <md-icon>refresh</md-icon>
+            </md-button>
+
+            <md-button class="md-icon-button">
+                <md-icon>more_vert</md-icon>
+            </md-button>
+            </div>
         </div>
+        </md-toolbar>
+
+
         <div>
             <div>
                 <md-list class="md-triple-line">
@@ -70,11 +98,16 @@ export default {
             duration: 4000,
             isInfinity: false,
 
-            msg: ""
+            msg: "",
+
+            //Barra de pesquisa
+            selectedScore: null,
+            scoresSearch: [],
         }
     },
     mounted(){
         this.getScore();
+        
     },
     methods:{
 
@@ -84,17 +117,23 @@ export default {
 
         snackbarShow(msg){
             this.showSnackbar = true
-            this.msg = "Mensagem: Solicitação removida com sucesso!";
-            this.getScore();
+            this.msg = msg;
         },
 
         getScore(){
-
-            console.info('\n\n getScore \n\n');
+            //Zerar a lista de pesquisa
+            this.scoresSearch = [];
             
+            console.info('\n\n getScore \n\n');
+            this.snackbarShow("Buscando Score")
             axios.get(`score/`).then(res => {
                 console.log(res.data);
                 this.scores = res.data;
+
+                //Popular a lista de pesquisa
+                for (let index = 0; index < res.data.length; index++) {
+                    this.scoresSearch.push(res.data[index].nome);
+                }
             })
             .catch(error => console.error(error));
         },
@@ -120,7 +159,9 @@ export default {
             console.info('\n\n deleteScore \n\n');
             axios.delete(`score/${idToDelete}`).then(res => {
                 console.log(res.data);
-                this.snackbarShow(res.data);
+                // this.snackbarShow(res.data);
+                this.snackbarShow("Mensagem: Solicitação removida com sucesso!");
+                this.getScore();
             })
             .catch(error => console.error(error));
         },
@@ -129,6 +170,7 @@ export default {
             console.info('\n\n updateScore \n\n');
             axios.put(`score/${idToUpdate}`).then(res => {
                 console.log(res.data);
+                this.getScore();
             })
             .catch(error => console.error(error));
         },
@@ -154,4 +196,9 @@ export default {
     vertical-align: top;
     border: 1px solid rgba(#000, .12);
   }
+
+  .search {
+    max-width: 500px;
+  }
+
 </style>
