@@ -56,7 +56,7 @@ exports.nova_solicitacao_cartao = function(req,res){
       reqBody.approvedCreditValue = 0;
    }else if (creditScore >= 300 && creditScore <= 599){
       console.log('Entre 300 a 599 - APROVADO - 1000,00');
-      reqBody.statusScore = "Aprovado";
+      reqBody.statusScore = true;
       reqBody.approvedCreditValue = 1000.00;
    }else if (creditScore >= 600 && creditScore <= 799){
       console.log('Entre 600 a 799 - APROVADO - 50% da Renda');
