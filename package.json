@@ -5,6 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
+    "postinstall": "npm run build",
     "serve": "cd dmscore_frontend && vue-cli-service serve",
     "build": "cd dmscore_frontend && vue-cli-service build",
     "lint": "cd dmscore_frontend && vue-cli-service lint",
@@ -31,6 +32,7 @@
     "dotenv": "^8.1.0",
     "express": "^4.17.1",
     "mongoose": "^5.6.12",
+    "serve-static": "^1.14.1",
     "vue": "^2.6.10"
   },
   "devDependencies": {

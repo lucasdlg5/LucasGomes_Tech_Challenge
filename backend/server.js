@@ -1,10 +1,11 @@
 var express = require('express'),
 mongoose = require('mongoose'),
 bodyParser = require('body-parser');
-
+var serveStatic = require('serve-static');
 Score = require('./models/scoreModel'),
 
 app = express(),
+app.use(serveStatic('../dmscore_frontend/dist'));
 porta = process.env.PORT || 4000;
 
 mongoose.Promise = global.Promise;
