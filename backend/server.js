@@ -1,12 +1,13 @@
-var express = require('express'),
-mongoose = require('mongoose'),
-bodyParser = require('body-parser');
-var serveStatic = require('serve-static');
-Score = require('./models/scoreModel'),
-
-app = express(),
+var express = require('express')
+var cors = require('cors')
+var mongoose = require('mongoose')
+var bodyParser = require('body-parser')
+var serveStatic = require('serve-static')
+var Score = require('./models/scoreModel')
+var app = express()
+app.use(cors())
 app.use(serveStatic('./dmscore_frontend/dist'));
-porta = process.env.PORT || 4000;
+var porta = process.env.PORT || 4000;
 
 mongoose.Promise = global.Promise;
 // mongoose.connect(process.env.MONGODB_CLUSTER_URI || process.env.MONGODB_URI, { useNewUrlParser: true, useFindAndModify: false });
