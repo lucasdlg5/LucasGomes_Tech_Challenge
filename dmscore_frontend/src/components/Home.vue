@@ -1,4 +1,4 @@
-<template>
+<template >
     <div>
         <md-dialog :md-active.sync="showDialog">
             <md-dialog-title>Alterar Informações de pedido</md-dialog-title>
@@ -134,7 +134,7 @@
             <md-progress-spinner class="md-accent" md-mode="indeterminate"></md-progress-spinner>
         </div>
         <div v-if="!progressSpinner">
-            <md-table v-model="scores" md-sort="creditScore" md-sort-order="asc" md-card @md-selected="onSelect">
+            <md-table v-model="scores" md-sort="creditScore" md-sort-order="asc" md-card @md-selected="onSelect" >
                 <md-table-toolbar>
                     <h1 class="md-title">Pedidos de Crédito</h1>
                 </md-table-toolbar>
@@ -154,7 +154,7 @@
         <!-- FIM - CARDS PESQUISA -->
         <!-- INICIO - BOTOES PARA NAVEGACAO TEMPORARIA -->
         <div>
-            <md-button class="md-raised md-accent" v-on:click="deleteScore()">Deletar Registro</md-button>
+            <md-button v-if="toggleDelete" class="md-raised md-accent" v-on:click="deleteScore()">Deletar Registro</md-button>
             <!-- <md-button class="md-raised md-green" v-on:click="showDialogParams()">Alterar Registro</md-button> -->
         </div>
         <!-- FIM - BOTOES PARA NAVEGACAO TEMPORARIA -->
@@ -221,7 +221,11 @@
                 itemEdit: {},
 
                 // Item selecionado da lista
-                itemSelected: {}
+                itemSelected: {},
+
+                // Toggle botão delete
+                toggleDelete: false
+
             }
         },
         validations: {
@@ -260,7 +264,10 @@
             // INICIO Manipulação front-end
 
             onSelect(item) {
-                this.itemSelected = item
+                    // Quando Selecionado: item != null. Quando Descelecionado: item == null
+                    this.toggleDelete = !(item == null)
+                    this.itemSelected = item
+                
             },
 
             showDialogParams() {
