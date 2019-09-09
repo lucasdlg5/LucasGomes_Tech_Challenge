@@ -299,7 +299,6 @@
                 console.info('\n\n getScore \n\n');
                 this.snackbarShow("Buscando Score")
                 axios.get(`score/`).then(res => {
-                        console.log(res.data);
                         this.scores = res.data;
 
                         //Popular a lista de pesquisa
@@ -315,7 +314,6 @@
             postScore(params) {
                 console.info('\n\n postScore \n\n');
                 axios.post(`score/`, params).then(res => {
-                        console.log(res.data);
                         this.getScore();
                     })
                     .catch(error => console.error(error));
@@ -328,7 +326,6 @@
                     if (Object.entries(this.itemSelected).length > 0) {
                         console.info('\n\n deleteScore \n\n');
                         axios.delete(`score/${this.itemSelected._id}`).then(res => {
-                                console.log(res.data);
                                 this.snackbarShow("Mensagem: Solicitação removida com sucesso!");
                                 this.getScore();
                             })
@@ -346,7 +343,6 @@
                 this.showDialog = false
                 console.info('\n\n updateScore \n\n');
                 axios.put(`score/${this.itemEdit._id}`, this.itemEdit).then(res => {
-                        console.log(res.data);
                         this.getScore();
                     })
                     .catch(error => console.error(error));
@@ -355,7 +351,6 @@
             getOneScore(idToSearch) {
                 console.info('\n\n getOneScore \n\n');
                 axios.put(`score/${idToSearch}`).then(res => {
-                        console.log(res.data);
                     })
                     .catch(error => console.error(error));
             },

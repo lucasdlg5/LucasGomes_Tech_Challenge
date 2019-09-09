@@ -1,41 +1,39 @@
 <template>
+  <div>
     <div>
-        <div>
-            <md-card>
-                <md-card-media>
-                    <img src="../assets/dmcard.png">
-                </md-card-media>
+      <md-card>
+        <md-card-media>
+          <img src="../assets/dmcard.png">
+        </md-card-media>
 
-                <md-card-header>
-                    <div class="md-title">Solicitação de Crédito</div>
-                    <div class="md-subhead">Peça e receba seu crédito em minutos!</div>
-                </md-card-header>
+        <md-card-header>
+          <div class="md-title">Solicitação de Crédito</div>
+          <div class="md-subhead">Peça e receba seu crédito em minutos!</div>
+        </md-card-header>
 
-                <md-card-actions>
-                    <md-button v-on:click="goToHome()">Entrar!</md-button>
-                </md-card-actions>
-
-                <!-- <md-card-content>
-                    Experimente 
-                </md-card-content> -->
-            </md-card>
-        </div>
+        <md-card-actions>
+          <md-button v-on:click="goToHome()">Entrar!</md-button>
+        </md-card-actions>
+      </md-card>
     </div>
+  </div>
 </template>
 
 <script>
-export default {
+  export default {
     name: 'login',
     methods: {
-        goToHome(){
-            this.$router.push({ path: 'home'})
-        }
+      goToHome() {
+        this.$router.push({
+          path: 'home'
+        })
+      }
     }
-}
+  }
 </script>
 
 <style lang="scss" scoped>
-.md-card {
+  .md-card {
     width: 320px;
     margin: 4px;
     display: inline-block;
@@ -43,44 +41,43 @@ export default {
   }
 
 
-    .md-subhead {
-      .md-icon {
-        $size: 16px;
+  .md-subhead {
+    .md-icon {
+      $size: 16px;
 
-        width: $size;
-        min-width: $size;
-        height: $size;
-        font-size: $size !important;
-      }
-
-      span {
-        vertical-align: middle;
-      }
+      width: $size;
+      min-width: $size;
+      height: $size;
+      font-size: $size !important;
     }
 
-    .card-reservation {
-      margin-top: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      .md-icon {
-        margin: 8px;
-      }
+    span {
+      vertical-align: middle;
     }
+  }
 
-    .md-button-group {
-      display: flex;
+  .card-reservation {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 
-      .md-button {
-        min-width: 60px;
-        border-radius: 2px;
-      }
+    .md-icon {
+      margin: 8px;
     }
+  }
 
-    .img {
-        height: 168px;
-        width: 300px;
+  .md-button-group {
+    display: flex;
+
+    .md-button {
+      min-width: 60px;
+      border-radius: 2px;
     }
-  
+  }
+
+  .img {
+    height: 168px;
+    width: 300px;
+  }
 </style>
