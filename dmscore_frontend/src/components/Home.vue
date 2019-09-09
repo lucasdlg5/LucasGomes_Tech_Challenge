@@ -142,10 +142,10 @@
                     <md-table-cell md-label="ID" md-numeric>{{ item._id }}</md-table-cell>
                     <md-table-cell md-label="Nome" md-sort-by="nome">{{ item.nome }}</md-table-cell>
                     <md-table-cell md-label="Email" md-sort-by="email">{{ item.email }}</md-table-cell>
-                    <md-table-cell md-label="Renda Base" md-sort-by="baseRenda">{{ item.baseRenda }}</md-table-cell>
+                    <md-table-cell md-label="Renda Base" md-sort-by="baseRenda">{{ numberFormatter(item.baseRenda) }}</md-table-cell>
                     <md-table-cell md-label="Credito Aprovado" md-sort-by="approvedCreditValue">
-                        {{ item.approvedCreditValue }}</md-table-cell>
-                    <md-table-cell md-label="Score" md-sort-by="creditScore">{{ item.creditScore }}</md-table-cell>
+                        {{ numberFormatter(item.approvedCreditValue) }}</md-table-cell>
+                    <md-table-cell md-label="Score" md-sort-by="creditScore">{{ decimalToFixed(item.creditScore) }}</md-table-cell>
                     <md-table-cell md-label="Status Aprovação" md-sort-by="statusScore">{{ item.statusScore }}
                     </md-table-cell>
                 </md-table-row>
@@ -250,6 +250,13 @@
         },
         methods: {
 
+            decimalToFixed(number){
+                return number.toFixed(0);
+            },
+
+            numberFormatter(number){
+                return Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(number)
+            },
             // INICIO Manipulação front-end
 
             onSelect(item) {
