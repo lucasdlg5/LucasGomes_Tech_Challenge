@@ -155,7 +155,7 @@
         <!-- INICIO - BOTOES PARA NAVEGACAO TEMPORARIA -->
         <div>
             <md-button class="md-raised md-accent" v-on:click="deleteScore()">Deletar Registro</md-button>
-            <md-button class="md-raised md-green" v-on:click="showDialogParams()">Alterar Registro</md-button>
+            <!-- <md-button class="md-raised md-green" v-on:click="showDialogParams()">Alterar Registro</md-button> -->
         </div>
         <!-- FIM - BOTOES PARA NAVEGACAO TEMPORARIA -->
         <md-snackbar :md-position="position" :md-duration="isInfinity ? Infinity : duration"
