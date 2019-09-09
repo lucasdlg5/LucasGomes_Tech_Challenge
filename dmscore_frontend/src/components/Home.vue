@@ -1,7 +1,5 @@
 <template>
-
     <div>
-
         <md-dialog :md-active.sync="showDialog">
                 <md-dialog-title>Alterar Informações de pedido</md-dialog-title>
                 <md-card-content>
@@ -9,12 +7,10 @@
                         <label>ID</label>
                         <md-input v-model="this.itemEdit._id" disabled/>
                     </md-field>
-
                     <md-field>
                         <label>Nome Completo</label>
                         <md-input v-model="this.itemEdit.nome" />
                     </md-field>
-
                     <md-field >
                         <label>Email</label>
                         <md-input type="email" name="email" id="email" autocomplete="email" v-model="this.itemEdit.email"/>
@@ -35,7 +31,6 @@
                             </md-field>
                         </div>
                     </div>
-
                     <div class="md-layout md-gutter">
                         <div class="md-layout-item md-small-size-100">
                             <md-field>
@@ -44,28 +39,13 @@
                                 <md-input v-model="this.itemEdit.creditScore" type="text" disabled></md-input>
                             </md-field>
                         </div>
-                        <!-- <div class="md-layout-item md-small-size-100">
-                            <md-field>
-                                <label>Status</label>
-                                <span class="md-prefix"></span>
-                                <md-input v-model="this.itemEdit.statusScore" type="text" disabled></md-input>
-                            </md-field>
-                        </div> -->
                     </div>
-
-
-                    <!-- <md-field>
-                        <label>Data Solicitação</label>
-                        <span class="md-prefix"></span>
-                        <md-input v-model="this.itemEdit.data_solicitacao " type="text" disabled></md-input>
-                    </md-field> -->
             <md-dialog-actions>
                 <md-button class="md-primary" @click="showDialog = false">Cancelar</md-button>
                 <md-button class="md-primary" v-on:click="updateScore()">Salvar</md-button>
             </md-dialog-actions>
                 </md-card-content>
         </md-dialog>
-
 
         <!-- INICIO TOOLBAR PESQUISA -->
         <md-toolbar class="md-primary">
@@ -75,34 +55,16 @@
                         <md-icon>keyboard_arrow_left</md-icon>
                     </md-button>
                 </div>
-
-                <!-- <md-autocomplete
-            class="search"
-            v-model="scoresSearch"
-            :md-options="scoresSearch"
-            md-layout="box">
-            <label>Buscar...</label>
-            </md-autocomplete> -->
-
                 <span>Painel de Scores</span>
-
                 <div class="md-toolbar-section-end">
                     <md-button class="md-icon-button" v-on:click="getScore()">
                         <md-icon>refresh</md-icon>
                     </md-button>
-
-                    <!-- <md-button class="md-icon-button">
-                <md-icon>more_vert</md-icon>
-            </md-button> -->
                 </div>
             </div>
         </md-toolbar>
-
         <!-- FIM TOOLBAR PESQUISA -->
-
-
         <!-- INICIO - MODAL CADASTRO -->
-
         <div v-if="showRegister">
             <form novalidate class="md-layout md-alignment-top-center" style="margin-top: 35px; margin-bottom: 35px;"
                 @submit.prevent="validateUser">
@@ -110,7 +72,6 @@
                     <md-card-header>
                         <div class="md-title">Solicitar Crédito</div>
                     </md-card-header>
-
                     <md-card-content>
                         <div class="md-layout md-gutter">
                             <div class="md-layout-item md-small-size-100">
@@ -124,7 +85,6 @@
                                         Inválida</span>
                                 </md-field>
                             </div>
-
                             <div class="md-layout-item md-small-size-100">
                                 <md-field :class="getValidationClass('lastName')">
                                     <label for="last-name">Sobrenome</label>
@@ -137,31 +97,6 @@
                                 </md-field>
                             </div>
                         </div>
-
-                        <!-- <div class="md-layout md-gutter">
-                        <div class="md-layout-item md-small-size-100">
-                        <md-field :class="getValidationClass('gender')">
-                            <label for="gender">Gênero</label>
-                            <md-select name="gender" id="gender" v-model="form.gender" md-dense :disabled="sending">
-                            <md-option></md-option>
-                            <md-option value="M">Masculino</md-option>
-                            <md-option value="F">Feminino</md-option>
-                            <md-option value="F">Não Identificar</md-option>
-                            </md-select>
-                            <span class="md-error">É necessário escolher um gênero</span>
-                        </md-field>
-                        </div>
-
-                        <div class="md-layout-item md-small-size-100">
-                        <md-field :class="getValidationClass('age')">
-                            <label for="age">Idade</label>
-                            <md-input type="number" id="age" name="age" autocomplete="age" v-model="form.age" :disabled="sending" />
-                            <span class="md-error" v-if="!$v.form.age.required">É necessário preencher a idade</span>
-                            <span class="md-error" v-else-if="!$v.form.age.maxlength">Idade Inválida!</span>
-                        </md-field>
-                        </div>
-                    </div> -->
-
                         <md-field :class="getValidationClass('renda')">
                             <label>Renda </label>
                             <span class="md-prefix">R$</span>
@@ -169,7 +104,6 @@
                             <span class="md-error" v-if="!$v.form.renda.required">É necessário preencher a renda</span>
                             <span class="md-error" v-else-if="!$v.form.renda.minlength">Renda Inválida!</span>
                         </md-field>
-
                         <md-field :class="getValidationClass('email')">
                             <label for="email">Email</label>
                             <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email" :disabled="sending" />
@@ -178,44 +112,31 @@
                             <span class="md-error" v-else-if="!$v.form.email.email">Email inválido!</span>
                         </md-field>
                     </md-card-content>
-
                     <md-progress-bar md-mode="indeterminate" v-if="sending" />
-
                     <md-card-actions>
-                        <md-button class="md-sucess" v-on:click="generateData()">Gerar Dados</md-button>
                         <md-button type="submit" class="md-primary" :disabled="sending">Enviar solicitação</md-button>
                     </md-card-actions>
                 </md-card>
-
                 <md-snackbar :md-active.sync="userSaved">Obrigado por solicitar seu crédito! Veja a seguir na lista sua
                     pontuação</md-snackbar>
             </form>
         </div>
-
         <!-- FIM - MODAL CADASTRO -->
-
         <div>
             <md-button class="md-fab md-icon-button md-list-action md-primary"
                 style="margin-top: 25px;margin-bottom: 25px;" v-on:click="toggleRegister()">
                 <md-icon class=" md-primary">add_circle</md-icon>
             </md-button>
         </div>
-
         <!-- INICIO - CARDS PESQUISA -->
-
-
         <div v-if="progressSpinner">
             <md-progress-spinner class="md-accent" md-mode="indeterminate"></md-progress-spinner>
         </div>
-
-
-
         <div v-if="!progressSpinner">
             <md-table v-model="scores" md-sort="creditScore" md-sort-order="asc" md-card @md-selected="onSelect">
             <md-table-toolbar>
                 <h1 class="md-title">Pedidos de Crédito</h1>
             </md-table-toolbar>
-
             <md-table-row slot="md-table-row" slot-scope="{ item }" md-selectable="single" class="md-primary">
                 <md-table-cell md-label="ID" md-numeric>{{ item._id }}</md-table-cell>
                 <md-table-cell md-label="Nome" md-sort-by="nome">{{ item.nome }}</md-table-cell>
@@ -227,11 +148,8 @@
             </md-table-row>
             </md-table>
         </div>
-
         <!-- FIM - CARDS PESQUISA -->
-
         <!-- INICIO - BOTOES PARA NAVEGACAO TEMPORARIA -->
-
         <div>
             <md-button class="md-raised md-accent" v-on:click="deleteScore()">Deletar Registro</md-button>
             <md-button class="md-raised md-green" v-on:click="showDialogParams()">Alterar Registro</md-button>
@@ -243,7 +161,6 @@
         </md-snackbar>
     </div>
 </template>
-
 <script>
     import axios from 'axios'
     import {
@@ -255,8 +172,6 @@
         minLength,
         maxLength
     } from 'vuelidate/lib/validators'
-
-
     export default {
         name: 'home',
         mixins: [validationMixin],
@@ -289,8 +204,6 @@
                 form: {
                     firstName: null,
                     lastName: null,
-                    // gender: null,
-                    // age: null,
                     email: null,
                     renda: null,
                 },
@@ -318,13 +231,6 @@
                     required,
                     minLength: minLength(3)
                 },
-                // age: {
-                //   required,
-                //   maxLength: maxLength(3)
-                // },
-                // gender: {
-                //   required
-                // },
                 email: {
                     required,
                     email
@@ -347,7 +253,6 @@
                 this.itemSelected = item
             },
 
-
             showDialogParams() {
 
                 if (Object.entries(this.itemSelected).length > 0 ){
@@ -358,32 +263,12 @@
                 }
 
             },
-            generateData() {
-
-
-                axios.get('https://api.namefake.com/portuguese-brazil/random/')
-                    .then(res => {
-                        debugger;
-
-                        var nameSplit = []
-                        // nameSplit = res.data.name.split(' ')
-                        // this.form.firstName = nameSplit[0],
-                        // this.form.lastName = nameSplit[1],
-                        // this.form.email = `${res.data.email_u}@${res.data.email_d}`,
-                        // this.form.renda = (Math.random()* (9999 - 1000) + 1),
-
-                    })
-
-
-            },
 
             goToLogin() {
                 this.$router.push({
                     path: '/'
                 })
             },
-
-
 
             snackbarShow(msg) {
                 if (!this.userSaved) {
@@ -426,13 +311,6 @@
 
             postScore(params) {
                 console.info('\n\n postScore \n\n');
-
-                // var params = {
-                //     "nome":"Lucas Domingos",
-                //     "email":"lucasdomingos@hotmail.com",
-                //     "baseRenda":"2000"
-                // }
-
                 axios.post(`score/`, params).then(res => {
                         console.log(res.data);
                         this.getScore();
@@ -441,14 +319,13 @@
             },
 
             deleteScore() {
-                
+
                 //Checa se foi selecionado um objeto verificando se há conteudo
                 if (this.itemSelected != null || this.itemSelected != undefined ){
                     if (Object.entries(this.itemSelected).length > 0 ){
                         console.info('\n\n deleteScore \n\n');
                         axios.delete(`score/${this.itemSelected._id}`).then(res => {
                                 console.log(res.data);
-                                // this.snackbarShow(res.data);
                                 this.snackbarShow("Mensagem: Solicitação removida com sucesso!");
                                 this.getScore();
                             })
@@ -498,8 +375,6 @@
                 this.$v.$reset()
                 this.form.firstName = null
                 this.form.lastName = null
-                // this.form.age = null
-                // this.form.gender = null
                 this.form.renda = null
                 this.form.email = null
             },
@@ -515,10 +390,7 @@
                 }
 
                 this.userSaved = true
-                // Instead of this timeout, here you can call your API
                 window.setTimeout(() => {
-
-
                     this.sending = false
                     this.clearForm()
                     this.postScore(params);
