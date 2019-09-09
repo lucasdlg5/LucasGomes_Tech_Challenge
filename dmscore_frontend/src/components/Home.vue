@@ -71,9 +71,9 @@
         <md-toolbar class="md-primary">
             <div class="md-toolbar-row">
                 <div class="md-toolbar-section-start">
-                    <!-- <md-button class="md-icon-button">
-                <md-icon>menu</md-icon>
-            </md-button> -->
+                    <md-button class="md-icon-button" v-on:click="goToLogin()">
+                        <md-icon>keyboard_arrow_left</md-icon>
+                    </md-button>
                 </div>
 
                 <!-- <md-autocomplete
@@ -235,9 +235,6 @@
         <div>
             <md-button class="md-raised md-accent" v-on:click="deleteScore()">Deletar Registro</md-button>
             <md-button class="md-raised md-green" v-on:click="showDialogParams()">Alterar Registro</md-button>
-        </div>
-        <div>
-            <md-button class="md-raised md-primary" v-on:click="goToLogin()">Go to Login</md-button>
         </div>
         <!-- FIM - BOTOES PARA NAVEGACAO TEMPORARIA -->
         <md-snackbar :md-position="position" :md-duration="isInfinity ? Infinity : duration"
