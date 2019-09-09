@@ -12,11 +12,11 @@
 
                     <md-field>
                         <label>Nome Completo</label>
-                        <md-input autocomplete="given-name" v-model="this.itemEdit.nome" />
+                        <md-input v-model="this.itemEdit.nome" />
                     </md-field>
 
                     <md-field >
-                        <label for="email">Email</label>
+                        <label>Email</label>
                         <md-input type="email" name="email" id="email" autocomplete="email" v-model="this.itemEdit.email"/>
                     </md-field>
                     <div class="md-layout md-gutter">
@@ -172,8 +172,7 @@
 
                         <md-field :class="getValidationClass('email')">
                             <label for="email">Email</label>
-                            <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email"
-                                :disabled="sending" />
+                            <md-input type="email" name="email" id="email" autocomplete="email" v-model="form.email" :disabled="sending" />
                             <span class="md-error" v-if="!$v.form.email.required">É necessário preencher com seu
                                 Email!</span>
                             <span class="md-error" v-else-if="!$v.form.email.email">Email inválido!</span>
@@ -212,48 +211,31 @@
 
 
         <div v-if="!progressSpinner">
-            <div>
-                <md-list class="md-triple-line">
-                    <md-list-item v-for="item in scores">
+            <md-table v-model="scores" md-sort="creditScore" md-sort-order="asc" md-card @md-selected="onSelect">
+            <md-table-toolbar>
+                <h1 class="md-title">Pedidos de Crédito</h1>
+            </md-table-toolbar>
 
-                        <md-avatar>
-                            <img src="https://placeimg.com/40/40/people/1" alt="People">
-                        </md-avatar>
-
-                        <div class="md-list-item-text">
-                            <span>ID: {{item._id}}</span>
-                            <span>Nome: {{item.nome}}</span>
-                            <span>Email: {{item.email}}</span>
-                            <span>Renda Base: R$ {{item.baseRenda}}</span>
-                            <span>Credito Aprovado: R$ {{item.approvedCreditValue}}</span>
-                            <span>Score: {{item.creditScore}}</span>
-                            <span>Status Aprovação: {{item.statusScore}}</span>
-                        </div>
-
-                        <md-button class="md-icon-button" v-on:click="showDialogParams(item)">
-                            <md-icon class="md-primary">edit</md-icon>
-                        </md-button>
-
-                        <md-button class="md-icon-button" v-on:click="deleteScore(item._id)">
-                            <md-icon class="md-primary">delete</md-icon>
-                        </md-button>
-
-                    </md-list-item>
-                    <!-- <md-divider class="md-inset"></md-divider> -->
-
-
-
-                </md-list>
-            </div>
-            <!-- <div>
-                <md-button class="md-raised md-lightgreen" v-on:click="getOneScore(idToSearch)">getOneScore</md-button>
-            </div> -->
+            <md-table-row slot="md-table-row" slot-scope="{ item }" md-selectable="single" class="md-primary">
+                <md-table-cell md-label="ID" md-numeric>{{ item._id }}</md-table-cell>
+                <md-table-cell md-label="Nome" md-sort-by="nome">{{ item.nome }}</md-table-cell>
+                <md-table-cell md-label="Email" md-sort-by="email">{{ item.email }}</md-table-cell>
+                <md-table-cell md-label="Renda Base" md-sort-by="baseRenda">{{ item.baseRenda }}</md-table-cell>
+                <md-table-cell md-label="Credito Aprovado" md-sort-by="approvedCreditValue">{{ item.approvedCreditValue }}</md-table-cell>
+                <md-table-cell md-label="Score" md-sort-by="creditScore">{{ item.creditScore }}</md-table-cell>
+                <md-table-cell md-label="Status Aprovação" md-sort-by="statusScore">{{ item.statusScore }}</md-table-cell>
+            </md-table-row>
+            </md-table>
         </div>
 
         <!-- FIM - CARDS PESQUISA -->
 
         <!-- INICIO - BOTOES PARA NAVEGACAO TEMPORARIA -->
 
+        <div>
+            <md-button class="md-raised md-accent" v-on:click="deleteScore()">Deletar Registro</md-button>
+            <md-button class="md-raised md-green" v-on:click="showDialogParams()">Alterar Registro</md-button>
+        </div>
         <div>
             <md-button class="md-raised md-primary" v-on:click="goToLogin()">Go to Login</md-button>
         </div>
@@ -323,7 +305,10 @@
                 showDialog: false,
 
                 // Em edição
-                itemEdit: {}
+                itemEdit: {},
+
+                // Item selecionado da lista
+                itemSelected: {}
             }
         },
         validations: {
@@ -361,9 +346,20 @@
 
             // INICIO Manipulação front-end
 
-            showDialogParams(params) {
-                this.showDialog = !this.showDialog;
-                this.itemEdit = params;
+            onSelect (item) {
+                this.itemSelected = item
+            },
+
+
+            showDialogParams() {
+
+                if (Object.entries(this.itemSelected).length > 0 ){
+                    this.itemEdit = this.itemSelected;
+                    this.showDialog = !this.showDialog;
+                }else{
+                    this.snackbarShow("Por Favor, Selecione um item da lista");
+                }
+
             },
             generateData() {
 
@@ -389,6 +385,8 @@
                     path: '/'
                 })
             },
+
+
 
             snackbarShow(msg) {
                 if (!this.userSaved) {
@@ -445,15 +443,25 @@
                     .catch(error => console.error(error));
             },
 
-            deleteScore(idToDelete) {
-                console.info('\n\n deleteScore \n\n');
-                axios.delete(`score/${idToDelete}`).then(res => {
-                        console.log(res.data);
-                        // this.snackbarShow(res.data);
-                        this.snackbarShow("Mensagem: Solicitação removida com sucesso!");
-                        this.getScore();
-                    })
-                    .catch(error => console.error(error));
+            deleteScore() {
+                
+                //Checa se foi selecionado um objeto verificando se há conteudo
+                if (this.itemSelected != null || this.itemSelected != undefined ){
+                    if (Object.entries(this.itemSelected).length > 0 ){
+                        console.info('\n\n deleteScore \n\n');
+                        axios.delete(`score/${this.itemSelected._id}`).then(res => {
+                                console.log(res.data);
+                                // this.snackbarShow(res.data);
+                                this.snackbarShow("Mensagem: Solicitação removida com sucesso!");
+                                this.getScore();
+                            })
+                            .catch(error => console.error(error));
+                    }else {
+                        this.snackbarShow("Por Favor, Selecione um item da lista");
+                    }
+                }else{
+                    this.snackbarShow("Por Favor, Selecione um item da lista");
+                }
             },
 
             updateScore() {
